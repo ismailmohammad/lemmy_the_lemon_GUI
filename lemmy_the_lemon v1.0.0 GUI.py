@@ -3,7 +3,9 @@ from tkinter import messagebox
 from tkinter import ttk
 import webbrowser
 import requests
+from multiprocessing import queues
 import webscraping as scraper
+from pygame import mixer
 
 def openWebSite(event):
     url = 'http://ismailmohammad.me/'
@@ -45,6 +47,10 @@ def clear_input_values(event):
     except:
         pass
     try:
+        check_link.grid_remove()
+    except:
+        pass
+    try:
         generate_link.grid_remove()
         frame4.grid_remove()
         frame5.grid_remove()
@@ -61,6 +67,15 @@ def clear_input_values(event):
     try:
         one_section_label.grid_remove()
         one_section.grid_remove()
+    except:
+        pass
+    try:
+        mixer.music.stop()
+    except:
+        pass
+    try:
+        leave_feedback.grid_remove()
+        frame7.grid_remove()
     except:
         pass
 
@@ -110,12 +125,15 @@ def show_search_results(scraped):
     return scraped
 
 def check_site(event):
-    check_exist = requests.head(url.get())
-    if check_exist.status_code == 200:
-        visit_link.grid(row=0,column=2)
-    else:
-        url.set("http://i.imgur.com/3UQqrhO.gif")
-        visit_link.grid(row=0,column=2)
+    try:
+        check_exist = requests.head(url.get())
+        if check_exist.status_code == 200:
+            visit_link.grid(row=0,column=2)
+        else:
+            url.set("http://i.imgur.com/3UQqrhO.gif")
+            visit_link.grid(row=0,column=2)
+    except:
+        visit_link.grid(row=0,column=2)        
         
 
 def generate_results(event):
@@ -226,16 +244,29 @@ def offline_version(event):
 
 def open_url(event):
     url_to_visit = url.get()
+    if url_to_visit == "http://i.imgur.com/3UQqrhO.gif":
+        mixer.music.play(-1)
+    frame7.grid(row=20, pady=(10,0))
+    leave_feedback.grid()    
     webbrowser.open(url_to_visit, new=0, autoraise=False)    
+
+def leave_feedback_typeform(event):
+    url_to_open = 'https://lilmoh17.typeform.com/to/zhxVhz'
+    webbrowser.open(url_to_open, new=0, autoraise=False)    
 
 CAMPUS_CODE = str(3)
     
 root = Tk()
 root.title("Lemmy The Lemon v1.0.0 GUI")
-root.config(bg='#00bcd4')
+root.config(bg='#212121')
 root.iconbitmap('resources/ismailmohammad_icon.ico')
 root.geometry('{}x{}'.format(692, 600))
 root.resizable(0,0)
+
+# Initialize pygame mixer
+mixer.init()
+# Load up the No Linky Mp3
+mixer.music.load('resources/no_linky.mp3')
 
 # This is the start of Frame 1 within the design of the Application
 # Within Row 0, Column 0 of root
@@ -265,10 +296,10 @@ welcome_disc.grid(row=0,column=1)
 # This is the start of Frame 2 within the design of this application
 # Within Row 1, Column 0 of root
 
-frame2 = Frame(root,bg='#00bcd4')
+frame2 = Frame(root,bg='#212121')
 frame2.grid(row=1,column=0,pady=(10,0))
 title_text = "Lemmy the Lemon v1.0.0 GUI"
-title_label = Label(frame2,text=title_text,bg='#00bcd4',fg='white')
+title_label = Label(frame2,text=title_text,bg='#212121',fg='white')
 title_label.config(font=("Arial Black", 20))
 title_label.grid(row=0,column=0)
 
@@ -277,27 +308,27 @@ title_label.grid(row=0,column=0)
 # This is the start of Frame 3 within the design of this application
 # Within Row 2, Column 0 of root
 
-frame3 = Frame(root,bg='#b2ebf2')
+frame3 = Frame(root,bg='#BDBDBD')
 frame3.grid(row=2,column=0,pady=(10,10))
 
 # Various Labels for Entry Fields
-year_lbl = Label(frame3, text="Year: ", justify=LEFT,bg='#b2ebf2')
+year_lbl = Label(frame3, text="Year: ", justify=LEFT,bg='#BDBDBD')
 year_lbl.grid(row=0,column=0,sticky=E)
 
-session_lbl = Label(frame3, text="Session: ",justify=LEFT,bg='#b2ebf2')
+session_lbl = Label(frame3, text="Session: ",justify=LEFT,bg='#BDBDBD')
 session_lbl.grid(row=1,column=0,sticky=E)
 
-coursecode_lbl = Label(frame3, text="Coursecode: ",justify=LEFT,bg='#b2ebf2')
+coursecode_lbl = Label(frame3, text="Coursecode: ",justify=LEFT,bg='#BDBDBD')
 coursecode_lbl.grid(row=2,column=0,sticky=E)
 
-crstype_lbl = Label(frame3, text="Course Type: ",justify=LEFT,bg='#b2ebf2')
+crstype_lbl = Label(frame3, text="Course Type: ",justify=LEFT,bg='#BDBDBD')
 crstype_lbl.grid(row=3, column=0,sticky=E)
 
 # Various Entry Fields
 
 year_sv = StringVar()
 year_sv.trace("w", lambda name, index, mode, sv=year_sv: limit_to_this(sv, 4))
-year = Entry(frame3, textvariable=year_sv,bg='#b2ebf2',relief=FLAT)
+year = Entry(frame3, textvariable=year_sv,bg='#BDBDBD',relief=FLAT)
 year.grid(row=0,column=1,sticky=W)
 year.focus_set()
 
@@ -310,7 +341,7 @@ session_list.grid(row=1,column=1,sticky=W)
 
 coursecode_sv = StringVar()
 coursecode_sv.trace("w", lambda name, index, mode, sv=coursecode_sv: limit_to_this(sv, 6))
-coursecode = Entry(frame3, textvariable=coursecode_sv, bg='#b2ebf2', relief=FLAT)
+coursecode = Entry(frame3, textvariable=coursecode_sv, bg='#BDBDBD', relief=FLAT)
 coursecode.grid(row=2,column=1, sticky=W)
 
 crstype = StringVar()
@@ -334,28 +365,28 @@ clear_info.grid(row=20,column=1)
 
 # This is the start of frame4
 
-frame4 = Frame(root,bg='#b2ebf2')
+frame4 = Frame(root,bg='#BDBDBD')
 
 list_of_sections = []
-search_label = Label(frame4, bg='#b2ebf2')
-search_results = Label(frame4, bg='#b2ebf2')
+search_label = Label(frame4, bg='#BDBDBD')
+search_results = Label(frame4, bg='#BDBDBD')
 
 select_section_label = Label(frame4,
                              text=("Choose the smaller value"+
                                    " within the Lecture Section Group: "),
-                             bg='#b2ebf2')
+                             bg='#BDBDBD')
 selected_section = StringVar()
 select_section = ttk.Combobox(frame4, textvariable=selected_section, state='readonly')
 
-select_lecture_label = Label(frame4, text="Choose Lecture to View:",bg='#b2ebf2')
+select_lecture_label = Label(frame4, text="Choose Lecture to View:",bg='#BDBDBD')
 select_lecture_sv = StringVar()
 select_lecture_sv.set("1") # Set Default Lecture to '1'
 lecture_options = []
-for lecture in range(1,37):
+for lecture in range(1,73):
     lecture_options.append(str(lecture))
 select_lecture = ttk.Combobox(frame4, textvariable=select_lecture_sv, values=lecture_options,state='readonly')
 
-one_section_label = Label(frame4,text="Is there only one WebOptioned section? ",bg='#b2ebf2')
+one_section_label = Label(frame4,text="Is there only one WebOptioned section? ",bg='#BDBDBD')
 one_section_options = ['Yes','No']
 one_section_sv = StringVar()
 one_section_sv.set(one_section_options[1])
@@ -364,7 +395,7 @@ one_section = ttk.Combobox(frame4,textvariable=one_section_sv, values=one_sectio
 url = StringVar()
 
 # This is Frame 5 of the application
-frame5 = Frame(root,bg='#b2ebf2')
+frame5 = Frame(root,bg='#BDBDBD')
 
 gen_img = PhotoImage(file="resources/generate_link.png")
 generate_link = ttk.Button(frame5, image=gen_img)
@@ -379,7 +410,7 @@ check_link = ttk.Button(frame5, image=check_img)
 check_link.bind("<Button-1>", check_site)
 
 # This is Frame 6 of the application
-frame6 = Frame(root,bg='#b2ebf2')
+frame6 = Frame(root,bg='#BDBDBD')
 frame6.grid(row=3,column=0)
 offline_sv = BooleanVar()
 offline_sv.set(False)
@@ -387,6 +418,12 @@ offline_img = PhotoImage(file='resources/offline_version.png')
 offline_button = ttk.Button(frame6, image=offline_img)
 offline_button.bind('<Button-1>', offline_version)
 offline_button.grid(row=0,column=0)
+
+# Frame 7
+frame7 = Frame(root,bg='#BDBDBD')
+leave_feedback_img = PhotoImage(file='resources/leave_feedback.png')
+leave_feedback = ttk.Button(frame7, image=leave_feedback_img)
+leave_feedback.bind('<Button-1>', leave_feedback_typeform)
 
 # Mainloops the root variable, or the TK Window
 root.mainloop()

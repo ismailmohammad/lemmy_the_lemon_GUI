@@ -22,7 +22,6 @@ import requests
 # BeautifulSoup Import
 import bs4
 
-
 class InvalidCourseCode(Exception):
     ''' A class to represent an Invalid Course Code Error'''
     # This will be the Exception that will be called later and the error will
@@ -126,9 +125,6 @@ def scrape_site(crscode, year, session):
     # Let's the user know the nature of the Exception being called and provides
     # a specific message
     except InvalidCourseCode:
-        print("You've entered an Invalid Coursecode, please ensure that" +
-              " this" +
-              "\nCoursecode actually exists and is weboptioned")
         pass
     # Returns the final_courses list
     return final_courses
@@ -160,8 +156,8 @@ if (__name__ == "__main__"):
     courses = [c1, c2, c3, c4, c5, c6, c7, c8]
     # Uses a for loop to loop through the courses and prints the list of
     # weboption sections.
-    # for course in courses:
-        #print(scrape_site(course, year, session))
+    for course in courses:
+        print(scrape_site(course, year, session))
         
     scraped = scrape_site(c1,year,session)
     
