@@ -1,2 +1,2 @@
-# lemmy_the_lemon_GUI
+# Lemmy the Lemon GUI
 GUI Release of Lemmy the Lemon
