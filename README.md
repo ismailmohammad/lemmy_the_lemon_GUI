@@ -1,6 +1,11 @@
 # Lemmy the Lemon GUI
 GUI Release of Lemmy the Lemon
 
+### Downloads
+Download the corresponding release zip file or tar file respectively based on whether you're using a Windows OS or Linux (Ubuntu, etc.), MacOS (maybe in the future if anyone ends up using this at all). Unzip then run the .exe on Windows or ./"Lemmy the Lemon GUI" on Linux. Source Code is provided if you're iffy about running it. 
+
+If it helped, feel free to "Star" the repository, thanks.
+
 ### Steps:
 ![alt text](https://lh3.googleusercontent.com/SJHwxJZsviyF7qvMEO5z_7By30VyGFtCXG0LxDVjeeFFrxo3WHm_2QJB5Ku2VQV3Z3eVl-MhsOdnsibb1ghg2GekOLkrigQQNTS0Pw7qTAKCGEmks8_cKJIDUnPlRPEArF8oeb--g6uIJEQMm0Z5NsyHE08dt6ScaOgpMsJgioIoe7hiFgiVtAiPycZCmwEpYbgZgdXMkLGnRqoADsfJIAKCU36SDzIW-kUbfAVJPdDdGZLanrDekJ5uN0fq-gY5_2g8M4n6Bs3eMq7TpyM4yegQbAftSnusg8P7LjKF9C4yJxuGlMMwEi_raApy0YkHeao8YHymxQlhVgPpcC6BQdYcf65ZeE4hUz6ibsIv9-XmgYIn3w63T0jZe7wwoVaKSuwd8hz-NvlLKdO-gGbdcGnXA_0-o8TNgb_9MGeLzMZxsLH9mGDRb6F-IeBST427CCaUl03ZdvYC42wh3QYgr-xMwTeyU9m7xtIp6DzIOPR9fDeut9HWmZcQcz4AoyhdbwpAxuIQF3F91KsWHgooE5vV9Iy7y2NDU39eOGjLsEil3SSEF2N1XhpFhO9LB0PIx34TYIGXSb321SiyqLk6n6svZMLci3VKR-hYFbrojJlTCm-s7j2OCMwkKH-Wiw-15hRP6r-lO7kADuDWJH3DX35Ivmp4um9S=w698-h628-no)
 ### Potential End Results:
