@@ -1,4 +1,4 @@
-# Lemmy the Lemon GUI
+# Lemmy the Lemon GUI [Deprecated for most lectures]
 GUI Release of Lemmy the Lemon
 
 ### Downloads
